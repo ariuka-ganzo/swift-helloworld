@@ -2,7 +2,7 @@
 stages:
 - name: Build Stage
   inputs:
-  - url: https://github.com/IBM-Bluemix/swift-helloworld
+  - url: https://git.ng.bluemix.net/roliv/swift-enterprise-demo-20170615164613060.git
     type: git
     branch: master
     dir_name: null
@@ -27,9 +27,11 @@ stages:
       region_id: ibm:yp:us-south
       organization: roliv@us.ibm.com
       space: dev
-      application: myapp-yeah-swift
+      application: swift-enterprise-demo-20170615164613060
     script: |-
       #!/bin/bash
+      cf create-service alertnotification authorizedusers SwiftEnterpriseDemo-Alert
+      cf create-service Auto-Scaling free SwiftEnterpriseDemo-Auto-Scaling
 
       cf push "${CF_APP}"
       # View logs
