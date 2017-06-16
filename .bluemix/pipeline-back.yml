@@ -4,7 +4,7 @@ stages:
   inputs:
   - url: https://github.com/IBM-Bluemix/swift-helloworld
     type: git
-    branch: master
+    branch: toolchain-tst
     dir_name: null
   triggers:
   - type: commit
@@ -24,18 +24,14 @@ stages:
   - name: Deploy
     type: deployer
     target:
-      region_id: ibm:yp:us-south
-      organization: roliv@us.ibm.com
-      space: dev
-      application: myapp-yeah-swift
-    script: |-
+      region_id: ${CF_REGION_ID}
+      organization: ${CF_ORGANIZATION_NAME}
+      space: ${CF_SPACE_NAME}
+      application: ${CF_APP_NAME}
+    script: |
       #!/bin/bash
-
-      cf push "${CF_APP}"
+      # Push app
+      cf push "${CF_APP_NAME}"
+      export APP_URL=http://$(cf app $CF_APP_NAME | grep urls: | awk '{print $2}')
       # View logs
-      # cf logs "${CF_APP}" --recent
-hooks:
-- enabled: true
-  label: null
-  ssl_enabled: false
-  url: https://devops-api.ng.bluemix.net/v1/messaging/webhook/publish
+      #cf logs "${CF_APP_NAME}" --recent
