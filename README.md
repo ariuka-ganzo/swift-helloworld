@@ -167,3 +167,8 @@ Once the sample application is pushed to Bluemix, you can access it using its ro
 ```
 Hello from Swift on Linux!
 ```
+
+#### Bluemix toolchain
+You can also set up a default Bluemix Toolchain to handle deploying your application to Bluemix. This is achieved by publishing your application to a publicly accessible github repository and using the "Create Toolchain" button below. In this case configured services will be automatically provisioned, once, during toolchain creation.
+
+[![Create Toolchain](https://console.ng.bluemix.net/devops/graphics/create_toolchain_button.png)](https://console.ng.bluemix.net/devops/setup/deploy/)
