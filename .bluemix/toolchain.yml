@@ -8,16 +8,14 @@ required:
  - repo
 
 toolchain:
-  name: mytooolchain-name
+  # Literally, the name of the toolchain that will appear on Bluemix
+  name: swift-evolution-toolchain
 
 # Github repos
 repo:
   service_id: githubpublic
   parameters:
-#    repo_name: "hello-world-{{name}}"
-#    repo_url: https://github.com/IBM-Bluemix/swift-helloworld/tree/develop
     repo_url: "{{repository}}"
-#    type: clone
     type: link
     has_issues: true
 
@@ -30,14 +28,14 @@ build:
     configuration:
      content: $file(pipeline.yml)
      env:
-      REPO: "hello-world-repo"
+      REPO: "the-hello-world-repo"
       CF_APP_NAME: "{{deploy.parameters.app-name}}"
       CF_SPACE_NAME: "{{deploy.parameters.dev-space}}"
       CF_ORGANIZATION_NAME: "{{deploy.parameters.dev-organization}}"
       CF_REGION_ID: "{{deploy.parameters.dev-region}}"
      execute: true
     services: ["repo"]
-  hidden: [form, description]
+  hidden: ["form"]
 
 # Deployment
 deploy:
