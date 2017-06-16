@@ -2,9 +2,9 @@
 stages:
 - name: Build Stage
   inputs:
-  - url: https://git.ng.bluemix.net/roliv/swift-enterprise-demo-20170615164613060.git
+  - url: https://github.com/IBM-Bluemix/swift-helloworld.git
     type: git
-    branch: master
+    branch: toolchain-tst
     dir_name: null
   triggers:
   - type: commit
@@ -27,15 +27,10 @@ stages:
       region_id: ibm:yp:us-south
       organization: roliv@us.ibm.com
       space: dev
-      application: swift-enterprise-demo-20170615164613060
-    script: |-
+      application: mypipeline
+    script: |
       #!/bin/bash
-      cf create-service alertnotification authorizedusers SwiftEnterpriseDemo-Alert
-      cf create-service Auto-Scaling free SwiftEnterpriseDemo-Auto-Scaling
-
       cf push "${CF_APP}"
-      # View logs
-      # cf logs "${CF_APP}" --recent
 hooks:
 - enabled: true
   label: null
