@@ -29,6 +29,7 @@ stages:
       #!/bin/bash
       # Create any services that are required
       # cf create-service "cloudantNoSQLDB" "Lite" "Cloudant NoSQL DB-w8"
+      # TODO: Blue-green deployment here...
       cf push "${CF_APP}"
       # cf logs "${CF_APP}" --recent
 - name: Prod Build Stage
