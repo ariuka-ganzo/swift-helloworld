@@ -2,8 +2,10 @@ stages:
 - name: Build Stage
   inputs:
   - type: git
-    branch: master
+    branch: develop
     service: ${REPO}
+  triggers:
+    - type: commit
   jobs:
   - name: Build
     type: builder
@@ -25,6 +27,7 @@ stages:
       application: ${CF_APP}
     script: |-
       #!/bin/bash
-      cf create-service "cloudantNoSQLDB" "Lite" "Cloudant NoSQL DB-w8"
+      # Create any services that are required
+      # cf create-service "cloudantNoSQLDB" "Lite" "Cloudant NoSQL DB-w8"
       cf push "${CF_APP}"
       # cf logs "${CF_APP}" --recent
