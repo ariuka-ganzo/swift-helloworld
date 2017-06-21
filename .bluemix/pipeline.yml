@@ -55,6 +55,7 @@ stages:
   - name: Deploy
     type: deployer
     target:
+      # TODO: Update org/space
       region_id: ${CF_REGION_ID}
       organization: ${CF_ORGANIZATION}
       space: ${CF_SPACE}
@@ -64,5 +65,6 @@ stages:
       # Create any services that are required
       # cf create-service "cloudantNoSQLDB" "Lite" "Cloudant NoSQL DB-w8"
       # TODO: Blue-green deployment here...
-      cf push "${CF_APP}"
+      # TODO: Enabled push once we have congfigured the space correctly.
+      # cf push "${CF_APP}"
       # cf logs "${CF_APP}" --recent
