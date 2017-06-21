@@ -34,7 +34,8 @@ stages:
 - name: Prod Build Stage
   inputs:
   - type: git
-    branch: master
+    #branch: master
+    branch: develop
     service: ${REPO}
   triggers:
     - type: commit
