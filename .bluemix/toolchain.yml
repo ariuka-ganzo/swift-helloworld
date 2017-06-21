@@ -1,15 +1,12 @@
----
-name: "Continuous Delivery Toolchain"
-description: "This toolchain is preconfigured for continuous delivery, source control, and issue tracking.\n\nTo get started, click **Create**."
-version: 0.1
-
+name: Continuous Delivery Toolchain
+description: "This toolchain includes tools to develop and deploy your app. Depending on your app, when you create the toolchain, the GitHub repository will either be empty or will contain source code from your app.\n\nThis toolchain uses tools that are part of the Continuous Delivery service. If an instance of that service isn't already in your organization, when you click **Create**, it is automatically added at no cost to you. For more information and terms, see the [Bluemix catalog](/catalog/services/continuous-delivery/).\n\nTo get started, click **Create**."
+version: 0.2
 required:
  - deploy
  - repo
 
 toolchain:
-  # Literally, the name of the toolchain that will appear on Bluemix
-  name: swift-evolution-toolchain
+  name: text-bot
 
 # Github repos
 repo:
@@ -28,18 +25,23 @@ build:
     configuration:
      content: $file(pipeline.yml)
      env:
-      REPO: "the-hello-world-repo"
-      CF_APP_NAME: "{{deploy.parameters.app-name}}"
-      CF_SPACE_NAME: "{{deploy.parameters.dev-space}}"
-      CF_ORGANIZATION_NAME: "{{deploy.parameters.dev-organization}}"
+      REPO: "repo"
+      CF_APP: "{{deploy.parameters.app-name}}"
+      CF_SPACE: "{{deploy.parameters.dev-space}}"
+      CF_ORGANIZATION: "{{deploy.parameters.dev-organization}}"
       CF_REGION_ID: "{{deploy.parameters.dev-region}}"
      execute: true
     services: ["repo"]
   hidden: ["form"]
 
-# Deployment
+#Web IDE
+webide:
+  service_id: orion
+
+#Deployment
 deploy:
-  schema: deploy.json
+  schema:
+    $ref: deploy.json
   service-category: pipeline
   parameters:
-    app-name: mytext-bot
+    app-name: text-bot
